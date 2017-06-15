@@ -80,8 +80,8 @@ passport.use("local.signin", new LocalStrategy({
 passport.use("twitter", new TwitterStrategy({
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callbackURL: "http://localhost:8000/auth/twitter/callback"
-    // callbackURL: "https://harryteo-votingapp.herokuapp.com/auth/twitter/callback"
+    // callbackURL: "http://localhost:8000/auth/twitter/callback"
+    callbackURL: "https://harryteo-pinterest-clone.herokuapp.com/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
   	User.findOne({"twitter.twitterId": profile.id}, function(err, user){
