@@ -1,0 +1,578 @@
+body {
+  padding: 95px 30px 30px 30px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+a, a:hover, a:focus {
+  color: #00B7FF;
+}
+
+/* Navbar */
+.navbar {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px 20px 5px 40px;
+	background-color: #fff;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.navbar .navbar-brand {
+	color: rgba(0, 0, 0, 0.5);
+	transition: background-color 0.3s ease;
+	transition: color 0.3s ease;
+}
+.navbar .navbar-brand .fa{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding-top: 7px;
+	padding-left: 7px;
+	font-size: 26px;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: background-color 0.5s ease;
+}
+.navbar .navbar-brand:hover .fa {
+	background-color: rgba(191, 64, 64, 1); 
+}
+.navbar .navbar-brand span{
+	display: block;
+	font-size: 16px;
+}
+.navbar .nav-link {
+  display: inline-block;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+	color: rgba(0, 0, 0, 0.5);
+	transition: background-color 0.3s ease;
+	transition: color 0.3s ease;  
+}
+.navbar .nav-link .fa{
+	width: 40px;
+	height: 40px;
+	padding-top: 7px;
+	padding-left: 7px;
+	font-size: 26px;
+	color: rgba(0, 0, 0, 0.5);
+	transition: color 0.5s ease;
+}
+.navbar .nav-link:hover .fa {
+	color: rgba(0, 0, 0, 0.9); 
+}
+.navbar .nav-link span{
+	display: block;
+	font-size: 16px;
+}
+.navbar .nav-link span.navbarAddTextPadding{
+	padding-left: 8px;
+}
+@media (max-width: 576px) {
+	.navbar .navbar-brand {	
+		padding-right: 20px;
+	}
+	.navbar {
+		padding: 5px 15px 5px 25px;
+	}
+	.navbar .navbar-brand .fa{
+		width: 34px;
+		height: 34px;
+		padding-top: 7px;
+		padding-left: 7px;
+		font-size: 20px;
+	}
+	.navbar .navbar-brand span{
+		font-size: 14px;
+	}
+	.navbar .nav-link .fa{
+		width: 30px;
+		height: 30px;
+		padding-top: 5px;
+		padding-left: 5px;
+		font-size: 20px;
+	}
+	.navbar .nav-link span{
+		font-size: 14px;
+	}
+	.navbar .nav-link span.navbarAddTextPadding{
+		padding-left: 4px;
+	}
+}
+
+/* Home Page & Profile Page */
+.card:hover {
+	box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+}
+.card .card-img-top {
+  cursor:zoom-in;
+}
+.card-block {
+	/*padding: 10px 0 0 0;*/
+}
+.card-title {
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+.card-text {
+	padding: 5px;
+}
+.card-footer {
+	position: relative;
+/*	margin-top: -5px;
+	border-top: none;
+	background-color: transparent;*/
+}
+.usernameLink {
+	display: inline-block;
+	margin-left: -1rem;
+	line-height: 1.25;
+	/*text-align: center;*/
+	vertical-align: middle;
+	padding: 0.5rem 0.5rem 0.5rem 0.6rem;
+	max-width: 180px;
+	word-wrap: break-word;  
+	white-space: normal;  
+  font-style: italic;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.7);
+}
+.usernameLink:focus, .usernameLink:active, .usernameLink:hover {
+  text-decoration: none;
+  color: rgba(51, 51, 51, 1);
+}
+.usernameLink.usernameLinkInactive {
+	cursor: default;
+}
+.usernameLink.usernameLinkInactive:hover {
+	color: rgba(51, 51, 51, 0.7);
+}
+
+.user-profile-button {
+	/*background-color: #fff;*/
+	border: 1px solid #ccc;
+}
+.user-profile-button img {
+	width: 20px;
+}
+
+.favorite-button {
+  position:absolute;
+  right: 1rem;
+  top:50%;
+  transform: translateY(-50%);
+	/*background-color: #fff;*/
+	color: #333;
+}
+.favorite-span {
+  position:absolute;
+  right: 1rem;
+  top:50%;
+  transform: translateY(-50%);
+	color: #333;	
+}
+.favorite-button:focus, .favorite-button:active {
+	box-shadow: none;
+}
+.favorite-button:hover {
+	cursor: pointer;
+}
+.favorite-button .fa-star.alreadyFavorite {
+	color: #f0ad4e;
+}
+.favorite-button .fa-star{
+	margin-left: -2px;
+	margin-right: 2px;
+}
+.delete-image {
+	position: absolute;
+	border-radius: 0;
+	padding: 7px 14px;
+	color: #fff;
+	background-color: rgba(217,83,79,0.4);
+	transition: background-color 0.5s ease;
+}
+.delete-image:hover {
+	cursor: pointer;
+	background-color: rgba(217,83,79,1);
+}
+.grid-sizer, .grid-item { 
+	width: 20%; 
+}
+.grid-item { 
+	float: left;
+	padding: 5px;
+}
+#profileInfo {
+	margin-bottom: 35px;
+}
+#profileInfo .profile-image {
+	width: 12vw;
+	height: 12vw;
+	/*border: 1px solid #aaa;*/
+	border-radius: 50%;
+}
+#profileInfo .profile-username {
+	margin-top: 7px;
+	font-family: 'Permanent Marker', cursive;
+	font-size: 20px;
+	color: #333;
+}
+#profileInfo .edit-profile {
+	position: absolute;
+	margin-top: 2px;
+	margin-left: -30px;
+	padding: 2px 6px;
+	color: #fff;
+	background-color: rgba(66,139,202,0.7);
+	transition: background-color 0.5s ease;	
+}
+#profileInfo .edit-profile:hover {
+	cursor: pointer;
+	background-color: rgba(66,139,202,1);
+}
+.favoritesGrid {
+	display: none;
+}
+#profileRadioButtons {
+	margin-bottom: 50px;
+}
+.switch {
+  display: inline-block;
+  height: 32px;
+  position: relative;
+  width: 480px !important;
+}
+.radio-switch {
+  margin-top: 3px;
+  background-color: #eee;
+  border-radius: 3px;
+  color: #333;
+  text-align: center;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px 1px inset;
+}
+input[type="radio"] {
+  margin: 3px 0 0;
+  margin-top: 1px;
+  line-height: normal;
+}
+.radio-switch input:checked + label {
+  color: #fff;
+}
+.radio-switch label {
+  text-transform: uppercase;
+  /*font-size: 16px;*/
+  color: #bbb;
+  font-weight: 400;
+  cursor: pointer;
+  -webkit-transition: color 0.2s ease-out;
+  -o-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+}
+.switch label {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  float: left;
+}
+.switch label,
+.switch > span {
+  line-height: 32px;
+  vertical-align: middle;
+}
+.radio-switch * {
+  outline: 0 !important;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+.switch a {
+  display: block;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+.switch a {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  z-index: 1;
+  width: 50%;
+  height: 100%;
+  color: #fff;
+  border: solid 1px #428bca;
+  background-color: #428bca;
+  left: 0;
+}
+.switch input:last-of-type:checked ~ a {
+  border: solid 1px #f0ad4e;
+  background-color: #f0ad4e;
+  left: 50%;
+}
+
+@media (max-width: 1140px) {
+	.grid-sizer, .grid-item { 
+		width: 33%; 
+	}
+	#profileInfo .profile-image {
+		width: 18vw;
+		height: 18vw;
+	}
+}
+@media (max-width: 768px) {
+	.grid-sizer, .grid-item { 
+		width: 50%; 
+	}
+	#profileInfo .profile-image {
+		width: 22vw;
+		height: 22vw;
+	}	
+}
+@media (max-width: 576px) {
+	.grid-sizer, .grid-item { 
+		width: 100%; 
+	}
+	#profileInfo .profile-image {
+		width: 25vw;
+		height: 25vw;
+	}	
+	.switch {
+	  width: 220px !important;
+	}	
+	.radio-switch label {
+		font-size: 12px;
+	}
+}
+.scrollTop {
+  position: fixed; 
+  bottom: 20px; 
+  right: 4px ;
+  background-color: transparent;
+  padding: 0px 3px; 
+  width: 26px; 
+  height: 26px; 
+  font-size: 22px; 
+  border-radius: 100% ; 
+  color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  border: 3px solid rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  display: none; 
+  -webkit-transition: color .3s ease-in-out, border-color .3s ease-in-out;
+  -moz-transition: color .3s ease-in-out, border-color .3s ease-in-out;
+  transition: color .3s ease-in-out, border-color .3s ease-in-out; 
+}
+.scrollTop:hover,
+.scrollTop:focus {
+  color: rgba(0,0,0,1);
+  border-color: rgba(0,0,0,1);
+}
+.scrollTop .fa {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Modals */
+.modal { 
+	text-align: center; 
+}
+.modal-open { /*Allow for page-scrolling while modal is open (by default bootstrap modal hides the scrollbar when open)*/
+  overflow: auto;   
+  padding-right: 30px !important;
+}
+/* Modal - imageModal */
+#imageModal.modal .modal-dialog {
+	margin-top: 40px;
+  max-width: 58%;
+  width: auto !important;
+  display: inline-block;
+}
+#imageModal.modal .modal-body {
+	padding: 3px;
+}
+#imageModal.modal .modal-body button.close {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 3px solid #fff;
+	font-size: 28px;
+	color: #fff;
+	background-color: #333;
+	opacity: 1;
+	position: absolute;
+	right:-18px;
+	top: -18px;
+	z-index: 1;
+}
+#imageModal.modal .modal-body button.close:focus, .modal-body button.close:active {
+	outline: none;
+}
+#imageModal.modal .modal-body button.close .fa {
+	padding-bottom: 5px;
+	padding-right: 1px;
+}
+@media (max-width: 992px) {
+	#imageModal.modal .modal-dialog {
+	  max-width: 80%;
+	}
+}
+@media (max-width: 576px) {
+	#imageModal.modal .modal-dialog {
+	  max-width: 100%;
+	  margin-top: 80px;
+	}
+}
+/* Modal - addImageModal */
+#addImageModal.modal .modal-header {
+	justify-content: center;
+  background-color: #202020;
+}
+#addImageModal.modal .modal-title {
+  font-size: 24px;
+  color: #fff;
+}
+#addImageModal.modal .modal-body {
+	text-align: left;
+}
+#addImageModal.modal .modal-body #addImageForm .form-group-title {
+	margin-top: -9px;
+	margin-bottom: 22px;
+}
+#addImageModal.modal .modal-body #addImageForm label{
+	padding-left: 2px;
+	font-weight: bold;
+}
+#imageUrlInput, #imageTitleInput {
+	box-shadow: none !important;
+	outline: none !important;
+}
+#invalid-url-error {
+	visibility: hidden;
+	opacity: 0;
+	font-size: 10px;
+	padding-top: 1px;
+	margin-left: 2px;
+	color: #d9534f;
+	transition: opacity 0.5s linear;
+}
+#addImageModal.modal .modal-buttons .btn {
+  width: 85px;
+  margin: 0 5px;
+  margin-top: 3px;
+  transition: all 0.2s ease-in-out;
+}
+#addImageModal.modal .modal-buttons .btn, #addImageModal.modal .modal-buttons .btn:hover, #addImageModal.modal .modal-buttons .btn:active, #addImageModal.modal .modal-buttons .btn:visited {
+  text-decoration: none !important;
+  outline: none !important;
+}
+@media (max-width: 576px) {
+	#addImageModal .modal-dialog {
+		margin-top: 80px;
+	}
+}
+/* Modal - editProfileModal */
+#editProfileModal.modal {
+	z-index: 1100;
+}
+#editProfileModal.modal .modal-header {
+	justify-content: center;
+  background-color: #202020;
+}
+#editProfileModal.modal .modal-title {
+  font-size: 24px;
+  color: #fff;
+}
+#editProfileModal .modal-body {
+	text-align: left;
+}
+#editProfileModal #profile-image-preview {
+	width: 10vw;
+	height: 10vw;
+	border-radius: 50%;
+}
+@media (max-width: 992px) {
+	#editProfileModal #profile-image-preview {
+		width: 20vw;
+		height: 20vw;
+	}
+}
+#editProfileModal #profile-username-preview {
+	margin-top: 7px;
+	font-family: 'Permanent Marker', cursive;
+	font-size: 20px;
+	color: #333;
+}
+#editProfileModal hr {
+	margin-bottom: 20px;
+}
+#editProfileModal.modal .modal-body #editProfileForm .form-group-username {
+	margin-bottom: 25px;
+}
+#editProfileModal.modal .modal-body #editProfileForm label{
+	padding-left: 2px;
+	font-weight: bold;
+}
+
+/* SignIn/SignUp Pages - signin/signup Form */
+.signInTitle, .signUpTitle {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.errors-alert p {
+	margin-bottom: 0;
+	padding: 5px 0;
+	font-weight: bold;
+	font-style: italic;
+}
+.signinTryAgainMsg {
+	margin-top: -5px;
+	margin-bottom: 25px;
+}
+.separator-with-label {
+	text-align: center;
+	color: #ccc;
+	position:relative;
+	margin: 0;
+}
+.separator-with-label label {
+	display: block;
+	position: absolute;
+	font-size: 12px;
+	top: -8px;
+	margin: 0;
+	width: 100%;
+}
+.separator-with-label label span {
+	padding: 0 1em;
+	background-color: #fff;	
+}
+.fa-facebook, .fa-twitter {
+	margin-right: 7px;
+}
+
+/* Error Page */
+#errorSection .fa {
+	margin-top: 45px;
+	font-size: 65px;
+	color: #d9534f;
+}
+#errorSection h1 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+  font-size: 38px;
+  letter-spacing: 0.05em;
+}
+#errorSection h1 span {
+	font-size: 42px;
+	font-weight: bold;
+}
+#errorSection p {
+	font-size: 24px;
+}

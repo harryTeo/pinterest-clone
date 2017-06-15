@@ -1,0 +1,154 @@
+<div id="profileInfo" class="container">
+	<div class="text-center">
+		{{#if_eq profileOwnerId userId}}<button type="button" class="btn edit-profile" data-id="{{userId}}" data-toggle="tooltip" data-placement="top" title="Edit Profile"><i class="fa fa-pencil" aria-hidden="true"></i></button>{{/if_eq}}
+	  <img class="profile-image" src="{{profileOwnerImageUrl}}" alt="Profile Picture">
+	  <h2 class="profile-username">{{profileOwnerName}}</h2>
+	</div>	
+</div>
+{{#if_eq profileOwnerId userId}}
+	<div id="profileRadioButtons" class="container">
+		<div class="text-center">
+		  <span class="switch radio-switch">
+		    <input name="radio" id="profileOwnerImages" value="1" type="radio" checked="checked"><label for="profileOwnerImages" class="radioCheck">Your Images</label>
+		    <input name="radio" id="favoriteImages" value="0" type="radio"><label for="favoriteImages" class="radioCheck">Favorites</label>
+				<a class="slide-button btn"></a>
+			</span>
+		</div>
+	</div>
+{{/if_eq}}
+<div class="grid">
+	{{#if isLoggedIn}}
+		{{#each profileOwnerImages}}
+			<div class="grid-item">
+			  <div class="card">
+			  	{{#if_eq ../profileOwnerId ../userId}}<button type="button" class="btn delete-image"><i class="fa fa-trash-o" aria-hidden="true"></i></button>{{/if_eq}}
+			    <img class="card-img-top img-fluid js-imageModal" src="{{this.url}}" alt="{{this.title}}" data-id="{{this._id}}" onerror="imgError(this);" />
+			    <div class="card-block">
+			      <h4 class="card-title text-center">{{this.title}}</h4>
+			    </div>
+				  <div class="card-footer">
+				   	<a href="/profile/{{this.createdById}}" class="usernameLink {{#if_eq ../profileOwnerId ../userId}}profileOwnerUsername{{/if_eq}}">{{this.createdByName}}</a>
+				   	<button type="button" class="btn btn-secondary favorite-button" data-id="{{this._id}}"><i class="fa fa-star {{#if this.alreadyFavorite}}alreadyFavorite{{/if}}" aria-hidden="true"></i> {{this.likes.length}}</button>
+				  </div>	    
+			  </div>
+			</div>
+		{{/each}}	
+	{{else}}
+		{{#each profileOwnerImages}}
+			<div class="grid-item">
+			  <div class="card">
+			    <img class="card-img-top img-fluid js-imageModal" src="{{this.url}}" alt="{{this.title}}" onerror="imgError(this);" />
+			    <div class="card-block">
+			      <h4 class="card-title text-center">{{this.title}}</h4>
+			    </div>
+				  <div class="card-footer">
+				   	<a href="/profile/{{this.createdById}}" class="usernameLink">{{this.createdByName}}</a>
+				   	<span class="favorite-span"><i class="fa fa-star" aria-hidden="true"></i> {{this.likes.length}}</span>
+				  </div>	    
+			  </div>
+			</div>
+		{{/each}}
+	{{/if}}		
+	<div class="grid-sizer"></div> 
+</div>
+{{#if_eq profileOwnerId userId}}
+	<div class="favoritesGrid">
+		{{#each favoriteImages}}
+			<div class="grid-item">
+			  <div class="card">
+			    <img class="card-img-top img-fluid js-imageModal" src="{{this.url}}" alt="{{this.title}}" data-id="{{this._id}}" onerror="imgError(this);" />
+			    <div class="card-block">
+			      <h4 class="card-title text-center">{{this.title}}</h4>
+			    </div>
+				  <div class="card-footer">
+				   	<a href="/profile/{{this.createdById}}" class="usernameLink {{#if_eq this.createdById ../userId}}profileOwnerUsername{{/if_eq}}">{{this.createdByName}}</a>
+				   	<button type="button" class="btn btn-secondary favorite-button" data-id="{{this._id}}"><i class="fa fa-star {{#if this.alreadyFavorite}}alreadyFavorite{{/if}}" aria-hidden="true"></i> {{this.likes.length}}</button>
+				  </div>	    
+			  </div>
+			</div>
+		{{/each}}	
+		<div class="grid-sizer"></div>
+	</div>
+{{/if_eq}}
+
+<span class="scrollTop" data-toggle="tooltip" data-placement="left" title="Back to Top"><i class='fa fa-angle-double-up'></i></span> 
+
+<!-- Modals -->
+
+<!-- imageModal -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>	      
+				<img src="" alt="" style="width:100%;" />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- addImageModal -->
+{{#if isLoggedIn}}
+	<div id="addImageModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Add Image</h4>
+	      </div>
+	      <div class="modal-body">
+		      <form id="addImageForm" action="/newimage" method="post">
+		        <div class="form-group">
+		          <label for="imageUrlInput">URL:</label>
+		          <input type="text" class="form-control" id="imageUrlInput" name="imageUrlInput" placeholder="Image URL..." autocomplete="off" required />
+		          <p id="invalid-url-error">Please enter a valid URL</p>
+		        </div>
+		        <div class="form-group form-group-title">
+		          <label for="imageTitleInput">Title:</label>
+							<input type="text" class="form-control" id="imageTitleInput" name="imageTitleInput" placeholder="Image Title..." autocomplete="off" required />
+		        </div>
+		        <div class="modal-buttons text-center">
+		        	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+	            <button type="submit" class="btn btn-primary">Save</button>
+	            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+	          </div>
+		      </form>  					  		
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	{{#if_eq profileOwnerId userId}}
+		<div id="editProfileModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">Edit Profile</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="text-center">
+						  <img id="profile-image-preview" src="{{profileOwnerImageUrl}}" data-src="{{profileOwnerImageUrl}}" alt="Profile Picture Preview" />
+						  <h2 id="profile-username-preview" data-name="{{profileOwnerName}}">{{profileOwnerName}}</h2>		  
+					  </div>    
+					  <hr>
+			      <form id="editProfileForm" enctype="multipart/form-data" action="/editprofile" method="post">
+						  <div class="form-group">
+						    <label for="profilePictureInputFile">Profile Picture:</label>
+						    <input type="file" class="form-control-file" id="profilePictureInputFile" name="profilePictureInputFile" onchange="previewImage();">
+						    <small id="fileHelp" class="form-text text-muted">Only JPG, JPEG, GIF and PNG files are allowed. Max size: 1MB</small>
+						  </div>			        
+			        <div class="form-group form-group-username">
+			          <label for="usernameInput">Username:</label>
+								<input type="text" class="form-control" id="usernameInput" name="usernameInput" value="{{profileOwnerName}}" placeholder="New Username..." autocomplete="off" minlength=2 maxlength=50/>
+			        </div>
+			        <div class="modal-buttons text-center">
+			        	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+		            <button type="submit" class="btn btn-primary">Save</button>
+		            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+		          </div>
+			      </form>  					  		
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+	{{/if_eq}}
+{{/if}}

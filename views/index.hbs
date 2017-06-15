@@ -1,0 +1,82 @@
+<div class="grid">
+	{{#if isLoggedIn}}
+		{{#each images}}
+			<div class="grid-item">
+			  <div class="card">
+			    <img class="card-img-top img-fluid js-imageModal" src="{{this.url}}" alt="{{this.title}}" onerror="imgError(this);" />
+			    <div class="card-block">
+			      <h4 class="card-title text-center">{{this.title}}</h4>
+			    </div>
+				  <div class="card-footer">
+				   	<a href="/profile/{{this.createdById}}" class="usernameLink">{{this.createdByName}}</a>
+				   	<button type="button" class="btn btn-secondary favorite-button" data-id="{{this._id}}"><i class="fa fa-star {{#if this.alreadyFavorite}}alreadyFavorite{{/if}}" aria-hidden="true"></i> {{this.likes.length}}</button>
+				  </div>	    
+			  </div>
+			</div>
+		{{/each}}
+	{{else}}
+		{{#each images}}
+			<div class="grid-item">
+			  <div class="card">
+			    <img class="card-img-top img-fluid js-imageModal" src="{{this.url}}" alt="{{this.title}}" onerror="imgError(this);" />
+			    <div class="card-block">
+			      <h4 class="card-title text-center">{{this.title}}</h4>
+			    </div>
+				  <div class="card-footer">
+				   	<a href="/profile/{{this.createdById}}" class="usernameLink">{{this.createdByName}}</a>
+				   	<span class="favorite-span"><i class="fa fa-star" aria-hidden="true"></i> {{this.likes.length}}</span>
+				  </div>	    
+			  </div>
+			</div>
+		{{/each}}
+	{{/if}}
+	<div class="grid-sizer"></div> 
+</div>
+
+<span class="scrollTop" data-toggle="tooltip" data-placement="left" title="Back to Top"><i class='fa fa-angle-double-up'></i></span> 
+
+<!-- Modals -->
+
+<!-- imageModal -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>	      
+				<img src="" alt="" style="width:100%;" />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- addImageModal -->
+{{#if isLoggedIn}}
+	<div id="addImageModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Add Image</h4>
+	      </div>
+	      <div class="modal-body">
+		      <form id="addImageForm" action="/newimage" method="post">
+		        <div class="form-group">
+		          <label for="imageUrlInput">URL:</label>
+		          <input type="text" class="form-control" id="imageUrlInput" name="imageUrlInput" placeholder="Image URL..." autocomplete="off" required />
+		          <p id="invalid-url-error">Please enter a valid URL</p>
+		        </div>
+		        <div class="form-group form-group-title">
+		          <label for="imageTitleInput">Title:</label>
+							<input type="text" class="form-control" id="imageTitleInput" name="imageTitleInput" placeholder="Image Title..." autocomplete="off" required />
+		        </div>
+		        <div class="modal-buttons text-center">
+		        	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+	            <button type="submit" class="btn btn-primary">Save</button>
+	            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+	          </div>
+		      </form>  					  		
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{{/if}}	
