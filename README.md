@@ -11,6 +11,7 @@ Developed for the [freeCodeCamp](https://www.freecodecamp.com/) Back End Develop
 6. As an authenticated user, if I upload an image that is broken, it will be replaced by a placeholder image. 
 
 Some additional functionality: 
+
 7. As an authenticated user, I can like/favorite images.
 8. As an authenticated user, I can see a Pinterest-style wall of all the images I've added to my favorites.
 9. As an authenticated user, I can edit my username and upload a profile picture (multer.js was used for this purpose).
