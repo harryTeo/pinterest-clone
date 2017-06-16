@@ -1,21 +1,39 @@
 var express = require('express');
 var router = express.Router();
+var AWS = require('aws-sdk');
 var multer  = require('multer');
+var multerS3 = require('multer-s3');
 var csrf = require("csurf");
 var passport = require('passport');
 
 var User = require("../models/user");
 var Image = require("../models/image");
 
-// Multer configuration
-var storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, './public/images/users/');
-  },
-  filename: function (req, file, callback) {
-    callback(null, Date.now() + "_" + file.originalname);
+// AWS (Amazon Web Services) and MulterS3 configuration
+AWS.config.update({
+	accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+  region: 'us-east-2'
+});
+var s3 = new AWS.S3();
+var storage = multerS3({
+  s3: s3,
+  bucket: 'harryteo-pinterest-clone',
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  // acl: 'bucket-owner-read',
+  key: function (req, file, callback) {
+    callback(null, "public/images/users/" + Date.now() + "_" + file.originalname);
   }
 });
+// Multer configuration
+// var storage = multer.diskStorage({
+//   destination: function (req, file, callback) {
+//   	callback(null, './public/images/users/');
+//   },
+//   filename: function (req, file, callback) {
+//     callback(null, Date.now() + "_" + file.originalname);
+//   }
+// });
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
@@ -122,13 +140,15 @@ router.post("/editprofile", isLoggedIn, function (req, res, next) {
   upload(req,res,function(err) {
   	// req.file will hold the uploaded file info
   	// req.body will hold the text fields
+  	
     if(err) return res.send({msg: "Error", newUsername: null, newProfilePictureFilename: null});
    
 		User.findById(req.user._id, function(err, user) {
 			if (err) return res.status(404).render('error', { errorStatus: 404, errorMessage: "User Not Found!" });
 			if (!user) return res.status(404).render('error', { errorStatus: 404, errorMessage: "User Not Found!" });  
 
-			user.profilePictureUrl = req.file ? "/images/users/" + req.file.filename : user.profilePictureUrl;
+			// user.profilePictureUrl = req.file ? "/images/users/" + req.file.filename : user.profilePictureUrl;
+			user.profilePictureUrl = req.file ? req.file.location : user.profilePictureUrl;
 
 			var currentUsername = user.twitter.name ? user.twitter.name : user.local.name;
 			var newUsername = req.body.usernameInput.trim();

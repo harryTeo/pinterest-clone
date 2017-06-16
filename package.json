@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aws-sdk": "^2.71.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.16.0",
     "connect-flash": "^0.1.1",
@@ -21,6 +22,7 @@
     "mongoose": "^4.9.3",
     "morgan": "~1.7.0",
     "multer": "^1.3.0",
+    "multer-s3": "^2.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
