@@ -18,8 +18,8 @@ var index = require('./routes/index');
 
 var app = express();
 
-mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGOLAB_URI, { useNewUrlParser: true });
 
 require("./config/passport");
 
